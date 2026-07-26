@@ -4,9 +4,9 @@ import streamlit as st
 from langchain_core.messages import HumanMessage, AIMessage
 
 # استدعاء الموديولات النظيفة التي أنشأناها
-from pdf_loader import DocumentProcessor
-from retriever import HybridReRankRetriever
-from agent_graph import RAGAgentGraph
+from rag.pdf_loader import DocumentProcessor
+from rag.retriever import HybridReRankRetriever
+from rag.agent_graph import RAGAgentGraph
 
 st.set_page_config(
     page_title="Multimodal Hybrid RAG Agent",
@@ -14,8 +14,8 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🧠 Enterprise Hybrid RAG Assistant")
-st.caption("Modular Pipeline powered by LangChain, LangGraph, Groq (Llama 3.3), and Streamlit.")
+st.title("Enterprise Hybrid RAG Assistant")
+st.caption("Modular Pipeline powered by Yassin Sanad")
 
 # --- إدارة الـ Session States ---
 if "rag_agent" not in st.session_state:
@@ -33,7 +33,7 @@ with st.sidebar:
         groq_api_key = st.text_input("Enter Groq API Key:", type="password")
 
     st.markdown("---")
-    st.header("📄 Document Upload")
+    st.header(" Document Upload")
     uploaded_file = st.file_uploader("Upload a PDF document", type=["pdf"])
 
     if uploaded_file and groq_api_key:
