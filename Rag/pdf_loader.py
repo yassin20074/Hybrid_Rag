@@ -13,6 +13,6 @@ class DocumentProcessor:
     def process_pdf(self, file_path: str) -> list[Document]:
         loader = PyPDFLoader(file_path)
         docs = loader.load()
-        # تقطيع النصوص لشرائح متناسقة
+           
         split_docs = self.text_splitter.split_documents(docs)
         return split_docs
