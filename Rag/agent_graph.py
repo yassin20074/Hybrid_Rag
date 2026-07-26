@@ -7,7 +7,7 @@ from langgraph.checkpoint.memory import MemorySaver
 
 from retriever import HybridReRankRetriever
 
-# 1. تعريف الـ State
+ 
 class AgentState(TypedDict):
     messages: Annotated[Sequence[BaseMessage], add_messages]
     context: str
@@ -20,7 +20,7 @@ class RAGAgentGraph:
             model_name="llama-3.3-70b-versatile",
             temperature=0.2
         )
-        self.memory = MemorySaver() # Checkpointer لحفظ المحادثة
+        self.memory = MemorySaver() 
         self.graph = self._build_graph()
 
     def retrieve_node(self, state: AgentState):
@@ -52,5 +52,5 @@ class RAGAgentGraph:
         workflow.add_edge("retrieve", "generate")
         workflow.add_edge("generate", END)
         
-        # ربط الـ Graph بالـ MemorySaver (Checkpointer)
+       
         return workflow.compile(checkpointer=self.memory)
