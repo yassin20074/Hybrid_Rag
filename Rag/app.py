@@ -3,7 +3,7 @@ import tempfile
 import streamlit as st
 from langchain_core.messages import HumanMessage, AIMessage
 
-# استدعاء الموديولات النظيفة التي أنشأناها
+ 
 from pdf_loader import DocumentProcessor
 from retriever import HybridReRankRetriever
 from agent_graph import RAGAgentGraph
@@ -17,14 +17,14 @@ st.set_page_config(
 st.title("Enterprise Hybrid RAG Assistant")
 st.caption("Modular Pipeline powered by Yassin Sanad")
 
-# --- إدارة الـ Session States ---
+ 
 if "rag_agent" not in st.session_state:
     st.session_state.rag_agent = None
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# --- الـ Sidebar للتحكم ---
+ 
 with st.sidebar:
     st.header("⚙️ Configuration")
     
@@ -43,19 +43,18 @@ with st.sidebar:
                     tmp_file.write(uploaded_file.read())
                     tmp_path = tmp_file.name
 
-                # 1. Processing
+                
                 processor = DocumentProcessor()
                 docs = processor.process_pdf(tmp_path)
                 
-                # 2. Retrieving & Graph Setup
+                 
                 retriever = HybridReRankRetriever(docs)
                 st.session_state.rag_agent = RAGAgentGraph(retriever, groq_api_key)
                 st.session_state.messages = []
                 
                 os.remove(tmp_path)
                 st.success(f"Indexed successfully! Total chunks: {len(docs)}")
-
-# --- واجهة المحادثة ---
+ 
 for msg in st.session_state.messages:
     role = "user" if isinstance(msg, HumanMessage) else "assistant"
     with st.chat_message(role):
