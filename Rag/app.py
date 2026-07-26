@@ -4,9 +4,9 @@ import streamlit as st
 from langchain_core.messages import HumanMessage, AIMessage
 
 # استدعاء الموديولات النظيفة التي أنشأناها
-from Rag.pdf_loader import DocumentProcessor
-from Rag.retriever import HybridReRankRetriever
-from Rag.agent_graph import RAGAgentGraph
+from pdf_loader import DocumentProcessor
+from retriever import HybridReRankRetriever
+from agent_graph import RAGAgentGraph
 
 st.set_page_config(
     page_title="Multimodal Hybrid RAG Agent",
